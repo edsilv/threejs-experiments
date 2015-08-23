@@ -37,6 +37,37 @@
 			var useAxisHelper = false;
 			var useBoundingBoxHelper = false;
 
+			var objects = {
+				violin: {
+					obj: 'obj/violin2.obj',
+					mtl: 'obj/violin2.mtl',
+					cameraX: 0,
+					cameraY: 0,
+					cameraZ: -1,
+					translateX: 0,
+					translateY: -0.3,
+					translateZ: 0,
+					rotateX: -1.57,
+					rotateY: 0,
+					rotateZ: 0
+				},
+				aphrodite: {
+					obj: 'obj/aphrodite-2-edit.obj',
+					mtl: 'obj/aphrodite-2-edit.mtl',
+					cameraX: 0,
+					cameraY: 0,
+					cameraZ: -50,
+					translateX: 0,
+					translateY: 0,
+					translateZ: 0,
+					rotateX: 0,
+					rotateY: 0,
+					rotateZ: 0
+				}
+			}
+			
+			var currentObj = objects.violin;
+
 			init();
 			render();
 
@@ -48,9 +79,9 @@
 				// camera
 				
 				camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-				camera.position.z = 1;
-				camera.position.y = 0;
-				camera.position.x = 0;
+				camera.position.x = currentObj.cameraX;
+				camera.position.y = currentObj.cameraY;
+				camera.position.z = currentObj.cameraZ;				
 
 				//controls
 				
@@ -90,7 +121,7 @@
 
 				var loader = new THREE.OBJMTLLoader();
 				
-				loader.load('obj/violin.obj', 'obj/violin.mtl', function (object) {
+				loader.load(currentObj.obj, currentObj.mtl, function (object) {
 					
 					scene.add(object);
 					
@@ -100,8 +131,8 @@
 						scene.add(helper);
 					}
 					
-					object.translateY(-0.3);
-					object.rotateX(-1.57);
+					object.translateY(currentObj.translateY);
+					object.rotateX(currentObj.rotateX);
 		
 				}, onProgress, onError);
 
