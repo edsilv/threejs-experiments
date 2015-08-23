@@ -34,7 +34,7 @@
 
 			var camera, controls, scene, renderer;
 
-			var useAxisHelper = false;
+			var useAxisHelper = true;
 			var useBoundingBoxHelper = false;
 
 			var objects = {
@@ -43,7 +43,7 @@
 					mtl: 'obj/violin2.mtl',
 					cameraX: 0,
 					cameraY: 0,
-					cameraZ: -1,
+					cameraZ: 1,
 					translateX: 0,
 					translateY: -0.3,
 					translateZ: 0,
@@ -131,8 +131,13 @@
 						scene.add(helper);
 					}
 					
+					object.translateX(currentObj.translateX);
 					object.translateY(currentObj.translateY);
+					object.translateZ(currentObj.translateZ);
+					
 					object.rotateX(currentObj.rotateX);
+					object.rotateY(currentObj.rotateY);
+					object.rotateZ(currentObj.rotateZ);
 		
 				}, onProgress, onError);
 
