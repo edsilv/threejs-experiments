@@ -34,7 +34,7 @@
 
 			var camera, controls, scene, renderer;
 
-			var useAxisHelper = true;
+			var useAxisHelper = false;
 			var useBoundingBoxHelper = false;
 
 			var objects = {
@@ -63,10 +63,49 @@
 					rotateX: 0,
 					rotateY: 0,
 					rotateZ: 0
+				},
+				niall: {
+					obj: 'obj/niall.obj',
+					mtl: 'obj/niall.mtl',
+					cameraX: 0,
+					cameraY: 0,
+					cameraZ: 1,
+					translateX: 0,
+					translateY: 0,
+					translateZ: 0,
+					rotateX: -1.57,
+					rotateY: 0,
+					rotateZ: 0
+				},
+				columbus: {
+					obj: 'obj/columbus.obj',
+					mtl: 'obj/columbus.mtl',
+					cameraX: 0,
+					cameraY: 0,
+					cameraZ: 1,
+					translateX: 0,
+					translateY: -0.2,
+					translateZ: 0,
+					rotateX: -1.57,
+					rotateY: 0,
+					rotateZ: -1.57
+				},
+				ted: {
+					obj: 'obj/ted2.obj',
+					mtl: 'obj/ted2.mtl',
+					cameraX: 0,
+					cameraY: 0,
+					cameraZ: 1.2,
+					translateX: 0,
+					translateY: -0.05,
+					translateZ: 0,
+					rotateX: -1.57,
+					rotateY: 0,
+					rotateZ: 0
 				}
 			}
 			
-			var currentObj = objects.violin;
+			var currentObj = objects.ted;
 
 			init();
 			render();
@@ -98,12 +137,12 @@
   					scene.add(axisHelper);
 				}
 
-				var ambient = new THREE.AmbientLight(0x444444);
+				var ambient = new THREE.AmbientLight(0xFFFFFF);
 				scene.add(ambient);
 
-				var directionalLight = new THREE.DirectionalLight(0xffeedd);
-				directionalLight.position.set(0, 0, 1).normalize();
-				scene.add(directionalLight);
+				// var directionalLight = new THREE.DirectionalLight(0xffeedd);
+				// directionalLight.position.set(0, 0, 1).normalize();
+				// scene.add(directionalLight);
 
 				// model
 

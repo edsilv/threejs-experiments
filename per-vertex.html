@@ -1,0 +1,216 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js webgl - loaders - OBJ MTL loader</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				font-family: Monospace;
+				background-color: #000;
+				color: #fff;
+				margin: 0px;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<script src="js/three.min.js"></script>
+		<script src="js/controls/OrbitControls.js"></script>
+
+		<script src="js/loaders/OBJLoader.js"></script>
+		<script src="js/loaders/DDSLoader.js"></script>
+		<script src="js/loaders/MTLLoader.js"></script>
+		<script src="js/loaders/OBJMTLLoader.js"></script>
+
+		<script src="js/Detector.js"></script>
+		<script src="js/libs/stats.min.js"></script>
+
+		<script>
+
+			var container, stats;
+
+			var camera, controls, scene, renderer;
+
+			var useAxisHelper = true;
+			var useBoundingBoxHelper = false;
+
+			var objects = {
+				violin: {
+					obj: 'obj/violin2.obj',
+					mtl: 'obj/violin2.mtl',
+					cameraX: 0,
+					cameraY: 0,
+					cameraZ: 1,
+					translateX: 0,
+					translateY: -0.3,
+					translateZ: 0,
+					rotateX: -1.57,
+					rotateY: 0,
+					rotateZ: 0
+				},
+				aphrodite: {
+					obj: 'obj/aphrodite-2-edit.obj',
+					mtl: 'obj/aphrodite-2-edit.mtl',
+					cameraX: 0,
+					cameraY: 0,
+					cameraZ: -50,
+					translateX: 0,
+					translateY: 0,
+					translateZ: 0,
+					rotateX: 0,
+					rotateY: 0,
+					rotateZ: 0
+				},
+				niall: {
+					obj: 'obj/niall.obj',
+					mtl: 'obj/niall.mtl',
+					cameraX: 0,
+					cameraY: 0,
+					cameraZ: 1,
+					translateX: 0,
+					translateY: 0,
+					translateZ: 0,
+					rotateX: -1.57,
+					rotateY: 0,
+					rotateZ: 0
+				},
+				columbus: {
+					obj: 'obj/columbus.obj',
+					texture: 'obj/columbus_color.png',
+					cameraX: 0,
+					cameraY: 0,
+					cameraZ: 1,
+					translateX: 0,
+					translateY: 0,
+					translateZ: 0,
+					rotateX: -1.57,
+					rotateY: 0,
+					rotateZ: 0
+				}
+			}
+			
+			var currentObj = objects.columbus;
+
+			init();
+			render();
+
+			function init() {
+
+				container = document.createElement('div');
+				document.body.appendChild(container);
+
+				// camera
+				
+				camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+				camera.position.x = currentObj.cameraX;
+				camera.position.y = currentObj.cameraY;
+				camera.position.z = currentObj.cameraZ;				
+
+				//controls
+				
+				controls = new THREE.OrbitControls(camera);
+				controls.damping = 0.2;
+				controls.addEventListener('change', render);
+
+				// scene
+
+				scene = new THREE.Scene();
+
+				if (useAxisHelper){
+					var axisHelper = new THREE.AxisHelper();
+  					scene.add(axisHelper);
+				}
+
+				var ambient = new THREE.AmbientLight(0xFFFFFF);
+				scene.add(ambient);
+
+				// var directionalLight = new THREE.DirectionalLight(0xffeedd);
+				// directionalLight.position.set(0, 0, 1).normalize();
+				// scene.add(directionalLight);
+
+				// model
+
+				var onProgress = function (xhr) {
+					if (xhr.lengthComputable) {
+						var percentComplete = xhr.loaded / xhr.total * 100;
+						console.log(Math.round(percentComplete, 2) + '% downloaded');
+					}
+				};
+
+				var onError = function (xhr) {
+				};
+
+				//THREE.Loader.Handlers.add(/\.dds$/i, new THREE.DDSLoader());
+				var texture = new THREE.Texture();
+
+				var loader = new THREE.ImageLoader();
+				loader.load(currentObj.texture, function (image) {
+					texture.image = image;
+					texture.needsUpdate = true;
+				}, onProgress, onError);
+
+				loader = new THREE.OBJLoader();				
+				loader.load(currentObj.obj, function (object) {
+					
+					object.traverse(function(child) {
+						if (child instanceof THREE.Mesh) {
+							child.material.map = texture;
+						}
+					});
+					
+					scene.add(object);
+					
+					if (useBoundingBoxHelper){
+						var helper = new THREE.BoundingBoxHelper(object, 0xff0000);
+						helper.update();
+						scene.add(helper);
+					}
+					
+					object.translateX(currentObj.translateX);
+					object.translateY(currentObj.translateY);
+					object.translateZ(currentObj.translateZ);
+					
+					object.rotateX(currentObj.rotateX);
+					object.rotateY(currentObj.rotateY);
+					object.rotateZ(currentObj.rotateZ);
+		
+				}, onProgress, onError);
+
+				renderer = new THREE.WebGLRenderer();
+				renderer.setPixelRatio(window.devicePixelRatio);
+				renderer.setSize(window.innerWidth, window.innerHeight);
+				container.appendChild(renderer.domElement);
+
+				window.addEventListener('resize', onWindowResize, false);
+
+				animate();
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize(window.innerWidth, window.innerHeight);
+
+				render();
+			}
+
+			function animate() {
+				requestAnimationFrame(animate);
+				controls.update();
+				render();
+			}
+
+			function render() {
+				renderer.render(scene, camera);
+			}
+
+		</script>
+
+	</body>
+</html>
