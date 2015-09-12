@@ -36,6 +36,7 @@
 
 			var useAxisHelper = false;
 			var useBoundingBoxHelper = false;
+			var bgColor = 0x000000;
 
 			var objects = {
 				violin: {
@@ -102,10 +103,36 @@
 					rotateX: -1.57,
 					rotateY: 0,
 					rotateZ: 0
+				},
+				kissers: {
+					obj: 'obj/kissers3.obj',
+					mtl: 'obj/kissers3.mtl',
+					cameraX: 0,
+					cameraY: 0,
+					cameraZ: 10,
+					translateX: 0,
+					translateY: 0,
+					translateZ: 0,
+					rotateX: 0,
+					rotateY: 0,
+					rotateZ: 0
+				},
+				bird: {
+					obj: 'obj/bird.obj',
+					mtl: 'obj/bird.mtl',
+					cameraX: 0,
+					cameraY: 0,
+					cameraZ: 3,
+					translateX: 0,
+					translateY: 0,
+					translateZ: 0,
+					rotateX: 0,
+					rotateY: 0,
+					rotateZ: 0
 				}
 			}
 			
-			var currentObj = objects.ted;
+			var currentObj = objects.bird;
 
 			init();
 			render();
@@ -137,13 +164,10 @@
   					scene.add(axisHelper);
 				}
 
-				var ambient = new THREE.AmbientLight(0xFFFFFF);
+				var ambient = new THREE.AmbientLight();
+				ambient.color.setHex(0xFFFFFF);
 				scene.add(ambient);
-
-				// var directionalLight = new THREE.DirectionalLight(0xffeedd);
-				// directionalLight.position.set(0, 0, 1).normalize();
-				// scene.add(directionalLight);
-
+				
 				// model
 
 				var onProgress = function (xhr) {
@@ -181,6 +205,7 @@
 				}, onProgress, onError);
 
 				renderer = new THREE.WebGLRenderer();
+				renderer.setClearColor(bgColor);
 				renderer.setPixelRatio(window.devicePixelRatio);
 				renderer.setSize(window.innerWidth, window.innerHeight);
 				container.appendChild(renderer.domElement);
