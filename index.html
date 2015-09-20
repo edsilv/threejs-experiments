@@ -12,6 +12,19 @@
 				color: #fff;
 				margin: 0px;
 				overflow: hidden;
+				position: relative;
+			}
+						
+			.loading {
+				position: absolute;
+				width: 200px;
+				height: 10px;
+				border: 1px solid grey;
+			}
+			
+			.loading .bar {
+				height: 10px;
+				background-color: #fff;
 			}
 		</style>
 	</head>
@@ -19,6 +32,8 @@
 	<body>
 
 		<div id="container"></div>
+
+		<script src="js/jquery.js"></script>
 
 		<script src="js/three.min.js"></script>
 		<script src="js/controls/OrbitControls.js"></script>
@@ -142,8 +157,10 @@
 			
 			var currentObj = objects.kissers;
 
-			init();
-			render();
+			$(function() {
+				init();
+				render();
+			});
 
 			function init() {
 
@@ -179,8 +196,15 @@
 
 				var onProgress = function (xhr) {
 					if (xhr.lengthComputable) {
-						var percentComplete = xhr.loaded / xhr.total * 100;
-						console.log(Math.round(percentComplete, 2) + '% downloaded');
+						var $loadingBar = $('.loading .bar');
+						var fullWidth = $loadingBar.parent().width();
+						var width = fullWidth * (xhr.loaded / xhr.total * 1);
+						$loadingBar.width(width);
+						if (width === fullWidth) {
+							$('.loading').hide();
+						}
+						
+						console.log(xhr.loaded / xhr.total * 100);
 					}
 				};
 
@@ -219,6 +243,8 @@
 
 				window.addEventListener('resize', onWindowResize, false);
 
+				onWindowResize();
+
 				animate();
 			}
 
@@ -228,6 +254,11 @@
 				camera.updateProjectionMatrix();
 
 				renderer.setSize(window.innerWidth, window.innerHeight);
+
+				$('.loading').css({
+					left: (window.innerWidth / 2) - ($('.loading').width() / 2),
+					top: (window.innerHeight / 2) - ($('.loading').height() / 2)
+				});
 
 				render();
 			}
@@ -243,6 +274,10 @@
 			}
 
 		</script>
+
+		<div class="loading">
+			<div class="bar"></div>
+		</div>
 
 	</body>
 </html>
