@@ -181,6 +181,10 @@
 				//controls
 				
 				controls = new THREE.OrbitControls(camera);
+				controls.minDistance = 1;
+				controls.maxDistance = 5;
+				controls.minPolarAngle = 0;
+				controls.maxPolarAngle = Math.PI/2; 
 				controls.damping = 0.2;
 				controls.addEventListener('change', render);
 
