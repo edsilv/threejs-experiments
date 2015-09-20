@@ -5,6 +5,19 @@
 		<title>three.js webgl - loaders - OBJ MTL loader</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+		<script src="js/jquery.js"></script>
+
+		<script src="js/three.min.js"></script>
+		<script src="js/controls/OrbitControls.js"></script>
+
+		<script src="js/loaders/DDSLoader.js"></script>
+		<script src="js/loaders/MTLLoader.js"></script>
+		<script src="js/loaders/OBJMTLLoader.js"></script>
+
+		<script src="js/Detector.js"></script>
+		<script src="js/libs/stats.min.js"></script>
+
 		<style>
 			body {
 				font-family: Monospace;
@@ -31,17 +44,11 @@
 
 	<body>
 
-		<script src="js/jquery.js"></script>
+		<div id="container"></div>
 
-		<script src="js/three.min.js"></script>
-		<script src="js/controls/OrbitControls.js"></script>
-
-		<script src="js/loaders/DDSLoader.js"></script>
-		<script src="js/loaders/MTLLoader.js"></script>
-		<script src="js/loaders/OBJMTLLoader.js"></script>
-
-		<script src="js/Detector.js"></script>
-		<script src="js/libs/stats.min.js"></script>
+		<div class="loading">
+			<div class="bar"></div>
+		</div>
 
 		<script>
 
@@ -51,7 +58,6 @@
 
 			var useAxisHelper = false;
 			var useBoundingBoxHelper = false;
-			var bgColor = 0x000000;
 
 			var objects = {
 				violin: {
@@ -65,7 +71,8 @@
 					translateZ: 0,
 					rotateX: -1.57,
 					rotateY: 0,
-					rotateZ: 0
+					rotateZ: 0,
+					bgColor: 0x000000
 				},
 				aphrodite: {
 					obj: 'obj/aphrodite-2-edit.obj',
@@ -78,7 +85,8 @@
 					translateZ: 0,
 					rotateX: 0,
 					rotateY: 0,
-					rotateZ: 0
+					rotateZ: 0,
+					bgColor: 0x000000
 				},
 				niall: {
 					obj: 'obj/niall.obj',
@@ -91,7 +99,8 @@
 					translateZ: 0,
 					rotateX: -1.57,
 					rotateY: 0,
-					rotateZ: 0
+					rotateZ: 0,
+					bgColor: 0x000000
 				},
 				columbus: {
 					obj: 'obj/columbus.obj',
@@ -104,7 +113,8 @@
 					translateZ: 0,
 					rotateX: -1.57,
 					rotateY: 0,
-					rotateZ: -1.57
+					rotateZ: -1.57,
+					bgColor: 0x000000
 				},
 				ted: {
 					obj: 'obj/ted2.obj',
@@ -117,7 +127,8 @@
 					translateZ: 0,
 					rotateX: -1.57,
 					rotateY: 0,
-					rotateZ: 0
+					rotateZ: 0,
+					bgColor: 0x000000
 				},
 				kissers: {
 					obj: 'obj/kissers3.obj',
@@ -130,7 +141,8 @@
 					translateZ: 0,
 					rotateX: 0,
 					rotateY: 0,
-					rotateZ: 0
+					rotateZ: 0,
+					bgColor: 0x86878C
 				},
 				bird: {
 					obj: 'obj/bird.obj',
@@ -143,11 +155,12 @@
 					translateZ: 0,
 					rotateX: 0,
 					rotateY: 0,
-					rotateZ: 0
+					rotateZ: 0,
+					bgColor: 0x2E373D
 				}
 			}
 			
-			var currentObj = objects.bird;
+			var currentObj = objects.kissers;
 
 			$(function() {
 				init();
@@ -156,8 +169,7 @@
 
 			function init() {
 
-				container = document.createElement('div');
-				document.body.appendChild(container);
+				container = $('#container')[0];
 
 				// camera
 				
@@ -229,7 +241,7 @@
 				}, onProgress, onError);
 
 				renderer = new THREE.WebGLRenderer();
-				renderer.setClearColor(bgColor);
+				renderer.setClearColor(currentObj.bgColor);
 				renderer.setPixelRatio(window.devicePixelRatio);
 				renderer.setSize(window.innerWidth, window.innerHeight);
 				container.appendChild(renderer.domElement);
@@ -267,10 +279,6 @@
 			}
 
 		</script>
-
-		<div class="loading">
-			<div class="bar"></div>
-		</div>
 
 	</body>
 </html>
