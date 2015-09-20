@@ -5,6 +5,19 @@
 		<title>three.js webgl - loaders - OBJ MTL loader</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+		<script src="js/jquery.js"></script>
+
+		<script src="js/three.min.js"></script>
+		<script src="js/controls/OrbitControls.js"></script>
+
+		<script src="js/loaders/DDSLoader.js"></script>
+		<script src="js/loaders/MTLLoader.js"></script>
+		<script src="js/loaders/OBJMTLLoader.js"></script>
+
+		<script src="js/Detector.js"></script>
+		<script src="js/libs/stats.min.js"></script>
+
 		<style>
 			body {
 				font-family: Monospace;
@@ -33,17 +46,9 @@
 
 		<div id="container"></div>
 
-		<script src="js/jquery.js"></script>
-
-		<script src="js/three.min.js"></script>
-		<script src="js/controls/OrbitControls.js"></script>
-
-		<script src="js/loaders/DDSLoader.js"></script>
-		<script src="js/loaders/MTLLoader.js"></script>
-		<script src="js/loaders/OBJMTLLoader.js"></script>
-
-		<script src="js/Detector.js"></script>
-		<script src="js/libs/stats.min.js"></script>
+		<div class="loading">
+			<div class="bar"></div>
+		</div>
 
 		<script>
 
@@ -164,7 +169,7 @@
 
 			function init() {
 
-				container = $('container')[0];
+				container = $('#container')[0];
 
 				// camera
 				
@@ -274,10 +279,6 @@
 			}
 
 		</script>
-
-		<div class="loading">
-			<div class="bar"></div>
-		</div>
 
 	</body>
 </html>
