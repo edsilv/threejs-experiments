@@ -18,6 +18,8 @@
 
 	<body>
 
+		<div id="container"></div>
+
 		<script src="js/three.min.js"></script>
 		<script src="js/controls/OrbitControls.js"></script>
 
@@ -120,7 +122,7 @@
 					rotateX: 0,
 					rotateY: 0,
 					rotateZ: 0,
-					bgColor: 0x000000
+					bgColor: 0x86878C
 				},
 				bird: {
 					obj: 'obj/bird.obj',
@@ -138,15 +140,14 @@
 				}
 			}
 			
-			var currentObj = objects.bird;
+			var currentObj = objects.kissers;
 
 			init();
 			render();
 
 			function init() {
 
-				container = document.createElement('div');
-				document.body.appendChild(container);
+				container = $('container')[0];
 
 				// camera
 				
