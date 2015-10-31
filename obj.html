@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>three.js webgl - loaders - OBJ MTL loader</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+		<script src="js/jquery.js"></script>
+
+		<style>
+			body {
+				font-family: Monospace;
+				color: #fff;
+				margin: 0px;
+				overflow: hidden;
+				position: relative;
+
+                background: #45484d; /* Old browsers */
+                background: -moz-radial-gradient(center, ellipse cover, #45484d 0%, #000000 100%); /* FF3.6+ */
+                background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#45484d), color-stop(100%,#000000)); /* Chrome,Safari4+ */
+                background: -webkit-radial-gradient(center, ellipse cover, #45484d 0%,#000000 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-radial-gradient(center, ellipse cover, #45484d 0%,#000000 100%); /* Opera 12+ */
+                background: -ms-radial-gradient(center, ellipse cover, #45484d 0%,#000000 100%); /* IE10+ */
+                background: radial-gradient(ellipse at center, #45484d 0%,#000000 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+			}
+						
+			.loading {
+				position: absolute;
+				width: 200px;
+				height: 10px;
+				border: 1px solid grey;
+			}
+			
+			.loading .bar {
+				height: 10px;
+				background-color: #fff;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div id="container"></div>
+
+		<div class="loading">
+			<div class="bar"></div>
+		</div>
+
+        <script src="js/three.min.js"></script>
+        <script src="js/controls/OrbitControls.js"></script>
+
+        <script src="js/loaders/DDSLoader.js"></script>
+        <script src="js/loaders/MTLLoader.js"></script>
+        <script src="js/loaders/OBJMTLLoader.js"></script>
+
+        <script src="js/Detector.js"></script>
+        <script src="js/stats.min.js"></script>
+		<script src="scene_obj.js"></script>
+
+	</body>
+</html>
