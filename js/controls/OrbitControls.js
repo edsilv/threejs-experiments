@@ -347,12 +347,12 @@ THREE.OrbitControls = function ( object, domElement ) {
 
 		state = STATE.NONE;
 
-		this.target.copy( this.target0 );
-		this.object.position.copy( this.position0 );
+		this.target.copy(this.target0);
+		this.object.position.copy(this.position0);
 		this.object.zoom = this.zoom0;
 
 		this.object.updateProjectionMatrix();
-		this.dispatchEvent( changeEvent );
+		this.dispatchEvent(changeEvent);
 
 		this.update();
 
