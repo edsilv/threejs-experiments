@@ -28,8 +28,8 @@ var dollyStart = new THREE.Vector2();
 
 var objects = {
     thekiss: {
-        model: 'models/kissers.json',
-        texture: 'images/kissers.png',
+        model: 'models/kiss.json',
+        texture: 'images/kiss.png',
         cameraX: 0,
         cameraY: 0,
         cameraZ: 4.5,
