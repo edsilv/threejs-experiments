@@ -46,10 +46,30 @@ var objects = {
         directionalLight2Intensity: 0.4,
         shininess: 1,
         shading: THREE.SmoothShading
+    },
+    nellis2: {
+        model: 'models/nellis2.json',
+        texture: 'images/nellis2.jpg',
+        cameraX: 0,
+        cameraY: 0,
+        cameraZ: 4.5,
+        translateX: 0,
+        translateY: 0,
+        translateZ: 0,
+        rotateX: 0,
+        rotateY: 0,
+        rotateZ: 0,
+        ambientLightColor: 0xc2c1be,
+        directionalLight1Color: 0xc2c1be,
+        directionalLight1Intensity: 0.65,
+        directionalLight2Color: 0x002958,
+        directionalLight2Intensity: 0.4,
+        shininess: 1,
+        shading: THREE.SmoothShading
     }
 };
 
-var currentObject = objects.thekiss;
+var currentObject = objects.nellis2;
 
 init();
 animate();
